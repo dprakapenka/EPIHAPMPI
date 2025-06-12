@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "epihap.hpc: Distributed Computing Package for Genomic Prediction and Variance Component Estimation"
+version: "1.0.0"
+date-released: "2025-04-22"
+authors:
+  - family-names: "Prakapenka"
+    given-names: "Dzianis"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+url: "https://github.com/you/epihap.hpc"
+repository-code:
+  type: "git"
+  url: "git@github.com:you/epihap.hpc.git"
+license: "GPL-3.0-or-later"

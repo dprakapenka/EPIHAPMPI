@@ -1,0 +1,38 @@
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+*.out
+
+# Build directories
+bin/
+obj/
+
+# Debug files
+*.dSYM/
+*.gcda
+*.gcno
+*.gcov
+
+# Editor & OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# CMake & Makefiles
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# User-specific settings
+.env
+.settings/
+.qodo

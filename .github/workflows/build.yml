@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Grab your code
+    - uses: actions/checkout@v4
+
+    # 2. Install Intel oneAPI via Intel's APT repo
+    - name: Add Intel APT repository key & source
+      run: |
+        wget -qO - https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS-2023.PUB \
+          | sudo apt-key add -
+        echo "deb https://apt.repos.intel.com/oneapi all main" \
+          | sudo tee /etc/apt/sources.list.d/oneAPI.list
+        sudo apt-get update                                     # :contentReference[oaicite:0]{index=0}
+
+    - name: Install oneAPI compilers, MPI & MKL
+      run: |
+        sudo apt-get install -y \
+          intel-oneapi-compiler-dpcpp-cpp \
+          intel-oneapi-compiler-fortran \
+          intel-oneapi-mpi intel-oneapi-mpi-devel \
+          intel-oneapi-mkl intel-oneapi-mkl-devel      # :contentReference[oaicite:1]{index=1}
+
+    # 3. Source the oneAPI environment so `mpiicpc`, `ifort`, `dpcpp`, MKL, etc. are on $PATH
+    - name: Configure oneAPI environment
+      run: |
+        source /opt/intel/oneapi/setvars.sh
+        echo "ONEAPI components ready"                     
+
+    # 4. Build your executables
+    - name: Build reml & grm
+      run: |
+        source /opt/intel/oneapi/setvars.sh
+        make 

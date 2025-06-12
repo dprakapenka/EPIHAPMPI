@@ -1,0 +1,14 @@
+Purpose: The program estimates variance components from genetic data using the Restricted Maximum Likelihood (REML) method. This is common in quantitative genetics for partitioning phenotypic variance into components attributable to different genetic and environmental factors.
+Parallel Implementation: It's designed for high-performance computing (HPC) environments. It utilizes:
+MPI (Message Passing Interface): For distributing the computation across multiple processor cores or nodes.
+BLACS (Basic Linear Algebra Communication Subprograms): To manage the communication for distributed matrix operations.
+ScaLAPACK (Scalable Linear Algebra PACKage): For performing linear algebra operations (like matrix multiplication, Cholesky factorization, solving linear systems) on matrices distributed across the MPI processes. Intel MKL (Math Kernel Library) provides the specific ScaLAPACK routines used.
+Core Algorithm:
+It reads phenotype data, individual IDs, and one or more Genetic Relationship Matrices (GRMs). GRMs quantify the genetic relatedness between individuals.
+It iteratively updates estimates for the variance components (e.g., additive variance, dominance variance, residual variance).
+It supports both Expectation-Maximization (EM-REML) and Average Information (AI-REML) algorithms for the updates, with AI-REML typically converging faster near the solution.
+The core calculations involve constructing and manipulating large distributed matrices representing the phenotypic variance-covariance structure (V) and its inverse using ScaLAPACK functions like pdgemm_, pdsymm_, pdpotrf_, pdpotrs_, and pdlatra_.
+Convergence is checked based on the change in variance estimates or derived heritabilities between iterations.
+Inputs & Outputs:
+Inputs: Takes command-line arguments specifying paths to phenotype files, GRM files, initial variance estimates, iteration controls, and output file names.
+Outputs: Prints iteration progress, final variance component estimates, and calculated heritabilities to standard output. It can likely also save results to files based on the options.
