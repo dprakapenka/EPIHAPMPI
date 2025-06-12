@@ -80,7 +80,7 @@ This software is licensed under the GNU General Public License v3.0 (GPLv3). See
 
 If you use this software in published research, you are **required to cite** the following:
 
-https://github.com/dprakapenka/epihap.mpi
+https://github.com/dprakapenka/EPIHAPMPI
 
 You can also find citation metadata in the [CITATION.cff](./CITATION.cff) file.
 
