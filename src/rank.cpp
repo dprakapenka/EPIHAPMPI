@@ -57,7 +57,7 @@ double compute_distributed_rank(
     double tol = eps * static_cast<double>(N) * lambda_max;
     int count = 0;
     for (MKL_INT i = 0; i < N; ++i) {
-        if (W[i] > tol) ++count;
+        if (std::abs(W[i]) > tol) ++count;
     }
 
     return count;
